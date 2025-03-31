@@ -78,7 +78,7 @@ function getPageTemplate(title, content, currentPath = '') {
             <a href="/docs/api" class="nav-group-item ${currentPath === '/docs/api' ? 'active' : ''}">API 文档</a>
             <a href="/docs/deployment" class="nav-group-item ${currentPath === '/docs/deployment' ? 'active' : ''}">部署指南</a>
             <a href="/docs/faq" class="nav-group-item ${currentPath === '/docs/faq' ? 'active' : ''}">常见问题</a>
-             <a href="/docs/github-upload" class="nav-group-item ${currentPath === '/docs/github-upload' ? 'active' : ''}">发布到github</a>
+            <a href="/docs/github-upload" class="nav-group-item ${currentPath === '/docs/github-upload' ? 'active' : ''}">发布到github</a>
           </div>
         </div>
       </nav>
