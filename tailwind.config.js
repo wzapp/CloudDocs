@@ -4,6 +4,8 @@
  * @type {import('tailwindcss').Config}
  */
 module.exports = {
+  // 启用暗黑模式
+  darkMode: 'class',
   // 内容配置 - 指定Tailwind应该分析哪些文件以生成所需的CSS
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",  // 源码文件
@@ -63,6 +65,28 @@ module.exports = {
             },
             'code::after': {
               content: 'none',
+            },
+          },
+        },
+        // 暗黑模式排版配置
+        dark: {
+          css: {
+            color: '#e5e7eb', // 浅灰色文本
+            // 暗黑模式下的标题样式
+            'h1, h2, h3, h4': {
+              color: '#f3f4f6', // 浅色标题
+            },
+            // 暗黑模式下的链接样式
+            a: {
+              color: '#38bdf8', // 暗黑模式下链接颜色
+              '&:hover': {
+                color: '#7dd3fc', // 暗黑模式下悬停颜色
+              },
+            },
+            // 暗黑模式下的代码样式
+            code: {
+              color: '#f3f4f6',
+              backgroundColor: '#1f2937', // 深色背景
             },
           },
         },

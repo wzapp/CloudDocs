@@ -18,6 +18,11 @@ const app = new Hono();
 app.get('/css/*', serveStatic({ root: './' }));
 
 /**
+ * 添加JS文件的静态文件服务配置
+ */
+app.get('/js/*', serveStatic({ root: './' }));
+
+/**
  * 从KV存储获取文档内容的辅助函数
  * @param {object} c - Hono上下文对象，包含环境变量和绑定
  * @param {string} filename - 要获取的文档文件名

@@ -18,27 +18,29 @@ function getPageTemplate(title, content, currentPath = '') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <link href="/css/styles.css" rel="stylesheet">
+  <!-- 预先加载主题脚本，避免闪烁 -->
+  <script src="/js/theme.js"></script>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
   <!-- 顶部导航栏 -->
-  <header class="sticky top-0 z-50 w-full backdrop-blur flex-none transition-colors duration-500 border-b border-gray-900/10 bg-white/95 supports-backdrop-blur:bg-white/60 h-[60px]">
+  <header class="sticky top-0 z-50 w-full backdrop-blur flex-none transition-colors duration-500 border-b border-gray-900/10 dark:border-gray-100/10 bg-white/95 dark:bg-gray-900/95 supports-backdrop-blur:bg-white/60 dark:supports-backdrop-blur:bg-gray-900/60 h-[60px]">
     <div class="max-w-8xl mx-auto h-full">
       <div class="flex items-center justify-between h-full px-4 lg:px-8">
         <!-- Logo -->
         <a class="flex items-center gap-2 transition-transform hover:scale-105" href="/">
-          <svg class="w-8 h-8 text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-8 h-8 text-primary-500 dark:text-primary-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="text-xl font-bold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">CloudDocs</span>
+          <span class="text-xl font-bold bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 bg-clip-text text-transparent">CloudDocs</span>
         </a>
         
         <!-- 中间搜索框 -->
         <div class="hidden md:flex items-center mx-6 lg:w-96">
           <div class="relative w-full">
-            <input type="text" placeholder="搜索文档..." class="w-full pl-10 pr-4 py-2 text-sm bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
-            <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <input type="text" placeholder="搜索文档..." class="w-full pl-10 pr-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+            <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
           </div>
@@ -46,12 +48,25 @@ function getPageTemplate(title, content, currentPath = '') {
         
         <!-- 主导航 -->
         <div class="flex items-center space-x-4">
-          <div class="hidden lg:flex items-center">
+          <div class="hidden lg:flex items-center space-x-2">
             <a class="nav-link" href="/docs/getting-started">快速开始</a>
             <a class="nav-link" href="/docs/api">API 文档</a>
             <a class="nav-link" href="/docs/faq">常见问题</a>
           </div>
-          <a class="hidden lg:inline-flex items-center justify-center h-8 px-4 text-sm font-medium text-white bg-primary-500 rounded-lg shadow-sm hover:bg-primary-600 transition-colors duration-200" href="https://github.com/wzapp/CloudDocs" target="_blank">
+          
+          <!-- 暗黑模式切换按钮 -->
+          <button id="themeToggle" class="theme-toggle transition-transform duration-200" aria-label="切换主题">
+            <!-- 太阳图标 (亮色模式时显示) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+            <!-- 月亮图标 (暗色模式时显示) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+          </button>
+          
+          <a class="hidden lg:inline-flex items-center justify-center h-8 px-4 text-sm font-medium text-white bg-primary-500 dark:bg-primary-600 rounded-lg shadow-sm hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-200" href="https://github.com/wzapp/CloudDocs" target="_blank">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
             </svg>
@@ -198,100 +213,12 @@ function getPageTemplate(title, content, currentPath = '') {
         }
         
         link.addEventListener('click', (e) => {
-          // 清除所有活动状态
-          document.querySelectorAll('.nav-group-content a').forEach(item => {
-            item.classList.remove('active');
-          });
-          
-          // 添加当前项的活动状态
-          link.classList.add('active');
-          
-          // 找到对应的导航组并展开
-          document.querySelectorAll('.nav-group-header').forEach(header => {
-            const group = header.getAttribute('data-group');
-            if (href.startsWith('/' + group + '/')) {
-              header.classList.add('expanded');
-              document.getElementById(group + 'Content').classList.add('expanded');
-              header.querySelector('svg').style.transform = 'rotate(0deg)';
-            }
-          });
-
-          // 如果是移动端，点击后关闭侧边栏
-          if (window.innerWidth < 1024) {
-            closeSidebar();
-          }
+          // 关闭移动端侧边栏
+          closeSidebar();
         });
       });
     });
   </script>
-
-  <style>
-    /* 导航组样式 */
-    .nav-group-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      color: #374151;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-
-    .nav-group-header:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .nav-group-content {
-      display: none;
-      padding-left: 1rem;
-    }
-
-    .nav-group-content.expanded {
-      display: block;
-    }
-
-    .nav-group-header svg {
-      transition: transform 0.2s;
-    }
-
-    .nav-group-header:not(.expanded) svg {
-      transform: rotate(-90deg);
-    }
-
-    /* 二级导航项样式 */
-    .nav-group-item {
-      display: block;
-      padding: 0.5rem 1rem;
-      margin: 0.25rem 0;
-      color: #4B5563;
-      text-decoration: none;
-      border-radius: 0.375rem;
-      transition: all 0.2s ease;
-      font-size: 0.875rem;
-    }
-
-    .nav-group-item:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: #111827;
-    }
-
-    /* 激活状态样式 */
-    .nav-group-item.active {
-      background-color: rgba(14, 165, 233, 0.1);
-      color: #0EA5E9;
-      font-weight: 500;
-    }
-
-    .nav-group-item.active:hover {
-      background-color: rgba(14, 165, 233, 0.15);
-    }
-
-    /* 首页链接样式 */
-    nav > .nav-group-item {
-      margin: 0.5rem 1rem;
-    }
-  </style>
 </body>
 </html>`;
 }
