@@ -1,5 +1,81 @@
 # 更新日志
 
+## 2025-05-15：增加暗黑模式支持
+
+### 功能更新
+1. **暗黑模式支持**：
+   - 新增网站暗黑模式切换功能，提升用户阅读体验
+   - 自动检测系统偏好设置，支持手动切换
+   - 增加主题切换按钮，方便用户随时切换
+   - 所有元素适配暗黑模式，提供良好的视觉体验
+
+2. **暗黑模式界面优化**：
+   - 精心设计的暗色配色方案，减少用眼疲劳
+   - 优化代码块、表格、图片等元素在暗黑模式下的显示效果
+   - 特别优化了阅读核心内容的对比度和可读性
+   - 保持品牌色调的一致性和辨识度
+
+3. **技术升级**：
+   - 更新Tailwind CSS配置，启用"class"模式的暗黑模式策略
+   - 为所有UI组件添加暗黑模式样式变体
+   - 优化CSS构建流程，减小最终样式文件体积
+   - 添加主题持久化存储，记住用户的主题偏好
+
+### 技术实现
+1. 在`tailwind.config.js`中：
+   ```javascript
+   module.exports = {
+     darkMode: 'class',
+     // 其他配置
+     theme: {
+       extend: {
+         // 暗黑模式排版配置
+         typography: {
+           dark: {
+             css: {
+               color: '#e5e7eb',
+               'h1, h2, h3, h4': {
+                 color: '#f3f4f6',
+               },
+               // 其他暗黑模式文本样式
+             },
+           },
+         },
+       },
+     },
+   }
+   ```
+
+2. 主题切换JavaScript：
+   ```javascript
+   // 检查当前主题，如果是暗黑模式则添加dark类
+   if (localStorage.theme === 'dark' || 
+       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+     document.documentElement.classList.add('dark')
+   } else {
+     document.documentElement.classList.remove('dark')
+   }
+   
+   // 主题切换事件监听
+   themeToggle.addEventListener('click', () => {
+     const isDark = document.documentElement.classList.toggle('dark');
+     localStorage.theme = isDark ? 'dark' : 'light';
+   });
+   ```
+
+### 新增和修改文件
+- `tailwind.config.js`：更新暗黑模式配置
+- `public/js/theme.js`：新增主题切换逻辑
+- `src/css/input.css`：为所有组件添加暗黑模式样式
+- `src/template.js`：更新HTML模板，添加暗黑模式切换按钮
+- `src/index.js`：添加JS静态文件服务配置
+
+### 使用体验改进
+- 用户可以通过顶部菜单中的主题切换按钮切换亮/暗模式
+- 网站会记住用户的主题偏好，下次访问时自动应用
+- 首次访问时会根据用户的系统设置自动应用相应主题
+- 所有内容在暗黑模式下更易于阅读，减少视觉疲劳
+
 ## 2025-05-01：CloudDocs v2.0 正式发布
 
 我们很高兴地宣布 CloudDocs v2.0 正式发布！这是一次重大更新，带来了全面的用户体验优化和功能增强。详细发布说明请查看[v2.0版本说明](v2.0-release-notes.md)。
