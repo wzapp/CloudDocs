@@ -62,6 +62,12 @@
     <h3 class="feature-title">部署指南</h3>
     <p class="feature-description">学习如何部署和配置系统。</p>
   </a>
+  
+  <a href="/docs/update-log" class="feature-card hover:no-underline">
+    <div class="feature-icon">📝</div>
+    <h3 class="feature-title">更新日志</h3>
+    <p class="feature-description">查看系统的最新变更和修复记录。</p>
+  </a>
 </div>
 
 ## 贡献指南
