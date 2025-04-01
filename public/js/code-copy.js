@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     copyButton.style.right = '4px';
     copyButton.style.padding = '4px';
     copyButton.style.color = '#666';
-    copyButton.style.background = 'rgba(220, 220, 220, 0.8)';
+    copyButton.style.background = 'rgba(40, 40, 40, 0.6)';
     copyButton.style.borderRadius = '3px';
     copyButton.style.fontSize = '10px';
     copyButton.style.zIndex = '999';
@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 添加按钮自身的悬停效果
     copyButton.addEventListener('mouseenter', function() {
-      copyButton.style.color = '#000';
-      copyButton.style.background = 'rgba(220, 220, 220, 0.9)';
+      copyButton.style.color = '#fff';
+      copyButton.style.background = 'rgba(60, 60, 60, 0.9)';
     });
     
     copyButton.addEventListener('mouseleave', function() {
       copyButton.style.color = '#666';
-      copyButton.style.background = 'rgba(220, 220, 220, 0.8)';
+      copyButton.style.background = 'rgba(40, 40, 40, 0.6)';
     });
     
     // 添加点击事件监听器
@@ -144,8 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
     style.textContent = `
       pre { position: relative !important; overflow: visible !important; }
       pre:hover .code-copy-button { opacity: 1 !important; }
-      .code-copy-button { color: #666 !important; background: rgba(220, 220, 220, 0.8) !important; }
-      .code-copy-button:hover { color: #000 !important; background: rgba(220, 220, 220, 0.9) !important; }
+      .code-copy-button { color: #666 !important; background: rgba(40, 40, 40, 0.6) !important; }
+      .code-copy-button:hover { color: #fff !important; background: rgba(60, 60, 60, 0.9) !important; }
     `;
     document.head.appendChild(style);
     console.log('添加了全局样式');
