@@ -41,11 +41,16 @@
 @layer components {
   /* 代码块容器样式 */
   pre {
-    @apply relative mb-4;
+    @apply mb-4;
   }
 
   /* 代码块父容器 */
   .code-block-container {
+    @apply relative mb-4;
+  }
+
+  /* 代码块包装容器 */
+  .code-block-wrapper {
     @apply relative mb-4;
   }
 
@@ -61,8 +66,8 @@
     @apply z-10 opacity-0;
   }
 
-  /* 代码块悬停时显示按钮 */
-  pre:hover .code-copy-button {
+  /* 代码块包装容器悬停时显示按钮 */
+  .code-block-wrapper:hover .code-copy-button {
     @apply opacity-100;
   }
 

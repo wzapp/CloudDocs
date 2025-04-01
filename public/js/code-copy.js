@@ -9,17 +9,21 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 为每个代码块添加复制按钮
   codeBlocks.forEach(function(preBlock) {
-    // 设置代码块为相对定位
-    preBlock.style.position = 'relative';
+    // 创建包装容器
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block-wrapper';
+    wrapper.style.position = 'relative';
+    
+    // 将原始代码块插入到包装容器之前
+    preBlock.parentNode.insertBefore(wrapper, preBlock);
+    
+    // 将代码块移动到包装容器中
+    wrapper.appendChild(preBlock);
     
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.className = 'code-copy-button';
     copyButton.setAttribute('aria-label', '复制代码');
-    copyButton.style.position = 'absolute';
-    copyButton.style.top = '2px';
-    copyButton.style.right = '2px';
-    copyButton.style.zIndex = '999';
     copyButton.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -28,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <span class="code-copy-tooltip">复制代码</span>
     `;
     
-    // 直接添加按钮到代码块中
-    preBlock.appendChild(copyButton);
+    // 添加按钮到包装容器中，但不是代码块的子元素
+    wrapper.appendChild(copyButton);
     
     // 添加点击事件监听器
     copyButton.addEventListener('click', function(e) {
