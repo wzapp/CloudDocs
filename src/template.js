@@ -19,7 +19,7 @@ function getPageTemplate(title, content, currentPath = '') {
   <title>${title}</title>
   <link href="/css/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col min-h-screen">
   <!-- 顶部导航栏 -->
   <header class="sticky top-0 z-50 w-full backdrop-blur flex-none transition-colors duration-500 border-b border-gray-900/10 bg-white/95 supports-backdrop-blur:bg-white/60 h-[60px]">
     <div class="max-w-8xl mx-auto h-full">
@@ -69,7 +69,7 @@ function getPageTemplate(title, content, currentPath = '') {
     </div>
   </header>
 
-  <div class="relative min-h-screen">
+  <div class="relative flex-grow flex">
     <!-- 遮罩层 -->
     <div id="overlay" class="sidebar-overlay"></div>
 
@@ -125,7 +125,7 @@ function getPageTemplate(title, content, currentPath = '') {
   </div>
   
   <!-- 页脚版本信息 -->
-  <footer class="text-center py-4 text-gray-500 text-xs">
+  <footer class="w-full py-4 text-center text-gray-500 text-xs bg-white border-t border-gray-200 shadow-md mt-auto">
     <p>CloudDocs v2.0 | Powered by Cloudflare Workers</p>
     <p class="mt-1">© 2025 CloudDocs Team. All rights reserved.</p>
   </footer>
@@ -296,6 +296,19 @@ function getPageTemplate(title, content, currentPath = '') {
     /* 首页链接样式 */
     nav > .nav-group-item {
       margin: 0.5rem 1rem;
+    }
+
+    /* 主内容区域样式 */
+    .main-content {
+      width: 100%;
+      padding-bottom: 2rem;
+    }
+
+    /* 确保侧边栏在小屏幕上正确显示 */
+    @media (max-width: 1023px) {
+      .doc-sidebar {
+        z-index: 40;
+      }
     }
   </style>
 </body>
