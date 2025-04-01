@@ -677,13 +677,16 @@ li:is(.dark *) {
   color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
-/* 代码复制按钮 */
-
-/* 代码块容器添加悬停状态 */
+/* 代码块容器样式 */
 
 pre {
-  position: relative;
+  position: relative !important;
+  margin-bottom: 1rem;
 }
+
+/* 代码复制按钮 */
+
+/* 代码块悬停时显示按钮 */
 
 /* 复制成功状态 */
 

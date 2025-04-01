@@ -5,14 +5,11 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   // 查找所有代码块
-  const codeBlocks = document.querySelectorAll('pre > code');
+  const codeBlocks = document.querySelectorAll('pre');
   
   // 为每个代码块添加复制按钮
-  codeBlocks.forEach(function(codeBlock) {
-    // 获取父元素pre
-    const preBlock = codeBlock.parentElement;
-    
-    // 创建相对定位容器
+  codeBlocks.forEach(function(preBlock) {
+    // 确保pre元素是相对定位
     preBlock.style.position = 'relative';
     
     // 创建复制按钮
@@ -33,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 添加点击事件监听器
     copyButton.addEventListener('click', function() {
       // 获取代码文本
-      const code = codeBlock.textContent;
+      const code = preBlock.textContent;
       
       // 使用现代 Clipboard API (如果可用)
       if (navigator.clipboard && window.isSecureContext) {
