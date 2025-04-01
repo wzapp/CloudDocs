@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
     copyButton.style.top = '4px';
     copyButton.style.right = '4px';
     copyButton.style.padding = '4px';
-    copyButton.style.color = '#aaa';
-    copyButton.style.background = 'rgba(220, 220, 220, 0.7)';
+    copyButton.style.color = '#666';
+    copyButton.style.background = 'rgba(220, 220, 220, 0.8)';
     copyButton.style.borderRadius = '3px';
     copyButton.style.fontSize = '10px';
     copyButton.style.zIndex = '999';
@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 添加按钮自身的悬停效果
     copyButton.addEventListener('mouseenter', function() {
-      copyButton.style.color = '#333'; // 深灰色，悬停时颜色加深
-      copyButton.style.background = 'rgba(220, 220, 220, 0.9)'; // 背景更不透明
+      copyButton.style.color = '#000';
+      copyButton.style.background = 'rgba(220, 220, 220, 0.9)';
     });
     
     copyButton.addEventListener('mouseleave', function() {
-      copyButton.style.color = '#aaa'; // 恢复原色
-      copyButton.style.background = 'rgba(220, 220, 220, 0.7)';
+      copyButton.style.color = '#666';
+      copyButton.style.background = 'rgba(220, 220, 220, 0.8)';
     });
     
     // 添加点击事件监听器
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // 2秒后恢复原样
           setTimeout(() => {
-            copyButton.style.color = '#aaa';
+            copyButton.style.color = '#666';
             copyButton.innerHTML = `
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor" style="width: 14px; height: 14px;">
                 <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -144,7 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
     style.textContent = `
       pre { position: relative !important; overflow: visible !important; }
       pre:hover .code-copy-button { opacity: 1 !important; }
-      .code-copy-button:hover { color: #333 !important; background: rgba(220, 220, 220, 0.9) !important; }
+      .code-copy-button { color: #666 !important; background: rgba(220, 220, 220, 0.8) !important; }
+      .code-copy-button:hover { color: #000 !important; background: rgba(220, 220, 220, 0.9) !important; }
     `;
     document.head.appendChild(style);
     console.log('添加了全局样式');
