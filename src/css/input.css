@@ -41,12 +41,12 @@
 @layer components {
   /* 代码复制按钮 */
   .code-copy-button {
-    @apply absolute top-2 right-2 p-1 rounded-md text-gray-400 dark:text-gray-500; 
+    @apply absolute top-1 right-1 p-0.5 rounded text-gray-400 dark:text-gray-500; 
     @apply hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
+    @apply focus:outline-none focus:ring-1 focus:ring-primary-500;
     @apply transition-all duration-200;
     @apply opacity-0 z-10;
-    @apply text-xs;
+    @apply text-[10px];
   }
 
   /* 代码块容器添加悬停状态 */
@@ -70,12 +70,12 @@
 
   /* 提示文本 */
   .code-copy-tooltip {
-    @apply absolute right-0 px-1.5 py-0.5 text-xs;
+    @apply absolute right-0 px-1 py-0.5 text-[8px];
     @apply bg-gray-800 dark:bg-gray-700 text-white rounded;
     @apply opacity-0 invisible;
     @apply transition-all duration-200;
     @apply whitespace-nowrap;
-    @apply -top-6 text-[10px];
+    @apply -top-5;
   }
 
   .code-copy-button:hover .code-copy-tooltip {
