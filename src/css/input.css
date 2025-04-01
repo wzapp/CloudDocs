@@ -54,19 +54,21 @@
     @apply relative mb-4;
   }
 
-  /* 代码复制按钮 */
+  /* VuePress风格的复制按钮 */
   .code-copy-button {
-    @apply absolute top-2 right-2 p-1;
-    @apply rounded text-gray-400 dark:text-gray-500;
-    @apply hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
-    @apply focus:outline-none focus:ring-1 focus:ring-primary-500;
-    @apply transition-all duration-200;
-    @apply text-[10px];
-    @apply bg-transparent;
-    @apply z-10 opacity-0;
+    @apply absolute top-0 right-0 p-1.5;
+    @apply text-gray-400 dark:text-gray-500;
+    @apply hover:text-gray-700 dark:hover:text-gray-300;
+    @apply focus:outline-none;
+    @apply transition-opacity duration-200;
+    @apply opacity-0;
+    @apply z-10;
+    @apply rounded-tr rounded-bl;
+    @apply bg-gray-200 dark:bg-gray-700 bg-opacity-80 dark:bg-opacity-80;
+    @apply text-xs;
   }
 
-  /* 代码块包装容器悬停时显示按钮 */
+  /* 代码块悬停时显示按钮 */
   .code-block-wrapper:hover .code-copy-button {
     @apply opacity-100;
   }

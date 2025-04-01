@@ -4,15 +4,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('代码复制功能初始化');
+  
   // 查找所有代码块
   const codeBlocks = document.querySelectorAll('pre');
+  console.log('找到代码块数量:', codeBlocks.length);
   
   // 为每个代码块添加复制按钮
-  codeBlocks.forEach(function(preBlock) {
+  codeBlocks.forEach(function(preBlock, index) {
     // 创建包装容器
     const wrapper = document.createElement('div');
     wrapper.className = 'code-block-wrapper';
-    wrapper.style.position = 'relative';
+    wrapper.style.position = 'relative'; // 强制设置相对定位
     
     // 将原始代码块插入到包装容器之前
     preBlock.parentNode.insertBefore(wrapper, preBlock);
@@ -20,25 +23,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // 将代码块移动到包装容器中
     wrapper.appendChild(preBlock);
     
-    // 创建复制按钮
+    // 创建复制按钮 - VuePress风格
     const copyButton = document.createElement('button');
     copyButton.className = 'code-copy-button';
     copyButton.setAttribute('aria-label', '复制代码');
+    copyButton.style.position = 'absolute'; // 强制设置绝对定位
+    copyButton.style.top = '0';
+    copyButton.style.right = '0';
+    copyButton.style.opacity = '0'; // 默认隐藏
+    copyButton.style.zIndex = '999';
+    
     copyButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
       </svg>
-      <span class="code-copy-tooltip">复制代码</span>
     `;
     
-    // 添加按钮到包装容器中，但不是代码块的子元素
+    // 将按钮添加到包装容器中
     wrapper.appendChild(copyButton);
+    console.log(`添加了复制按钮到代码块 ${index+1}`);
+    
+    // 添加悬停事件，确保按钮显示
+    wrapper.addEventListener('mouseenter', function() {
+      copyButton.style.opacity = '1';
+    });
+    
+    wrapper.addEventListener('mouseleave', function() {
+      copyButton.style.opacity = '0';
+    });
     
     // 添加点击事件监听器
     copyButton.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
+      
+      console.log('复制按钮被点击');
       
       // 获取代码文本
       let code;
@@ -49,121 +69,34 @@ document.addEventListener('DOMContentLoaded', function() {
         code = preBlock.textContent;
       }
       
-      // 使用现代 Clipboard API (如果可用)
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(code)
-          .then(() => showSuccess(copyButton))
-          .catch((err) => {
-            console.error('复制失败：', err);
-            showError(copyButton);
-          });
-      } else {
-        // 回退方法
-        fallbackCopyTextToClipboard(code, copyButton);
-      }
-      
-      return false;
+      // 使用现代 Clipboard API
+      navigator.clipboard.writeText(code)
+        .then(() => {
+          console.log('复制成功');
+          // 显示成功状态
+          copyButton.classList.add('success');
+          
+          // 更新图标为勾选标记
+          copyButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+          `;
+          
+          // 2秒后恢复原样
+          setTimeout(() => {
+            copyButton.classList.remove('success');
+            copyButton.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+              </svg>
+            `;
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('复制失败:', err);
+        });
     });
   });
-  
-  // 显示成功提示
-  function showSuccess(button) {
-    button.classList.add('success');
-    
-    // 更新图标为成功图标
-    button.querySelector('svg').outerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
-    `;
-    
-    // 更新提示文本
-    const tooltip = button.querySelector('.code-copy-tooltip');
-    if (tooltip) {
-      tooltip.textContent = '已复制';
-    }
-    
-    // 2秒后恢复原状
-    setTimeout(() => {
-      button.classList.remove('success');
-      if (tooltip) {
-        tooltip.textContent = '复制代码';
-      }
-      button.querySelector('svg').outerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-        </svg>
-      `;
-    }, 2000);
-  }
-  
-  // 显示错误提示
-  function showError(button) {
-    button.classList.add('error');
-    
-    // 更新图标为错误图标
-    button.querySelector('svg').outerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    `;
-    
-    // 更新提示文本
-    const tooltip = button.querySelector('.code-copy-tooltip');
-    if (tooltip) {
-      tooltip.textContent = '复制失败';
-    }
-    
-    // 2秒后恢复原状
-    setTimeout(() => {
-      button.classList.remove('error');
-      if (tooltip) {
-        tooltip.textContent = '复制代码';
-      }
-      button.querySelector('svg').outerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-        </svg>
-      `;
-    }, 2000);
-  }
-  
-  // 回退复制方法
-  function fallbackCopyTextToClipboard(text, button) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    
-    // 使文本域不可见
-    textArea.style.position = 'fixed';
-    textArea.style.top = '0';
-    textArea.style.left = '0';
-    textArea.style.width = '2em';
-    textArea.style.height = '2em';
-    textArea.style.padding = '0';
-    textArea.style.border = 'none';
-    textArea.style.outline = 'none';
-    textArea.style.boxShadow = 'none';
-    textArea.style.background = 'transparent';
-    
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-      const successful = document.execCommand('copy');
-      if (successful) {
-        showSuccess(button);
-      } else {
-        showError(button);
-      }
-    } catch (err) {
-      console.error('复制失败：', err);
-      showError(button);
-    }
-    
-    document.body.removeChild(textArea);
-  }
 }); 
