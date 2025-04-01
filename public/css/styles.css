@@ -684,7 +684,7 @@ pre {
   margin-bottom: 1rem;
 }
 
-/* 代码复制按钮 */
+/* 代码复制按钮 - 使用更高优先级 */
 
 /* 代码块悬停时显示按钮 */
 
@@ -693,13 +693,13 @@ pre {
 /* 复制失败状态 */
 
 .code-copy-button.error {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+  --tw-text-opacity: 1 !important;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1)) !important;
 }
 
 .code-copy-button.error:is(.dark *) {
-  --tw-text-opacity: 1;
-  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
+  --tw-text-opacity: 1 !important;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1)) !important;
 }
 
 /* 提示文本 */

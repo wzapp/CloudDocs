@@ -9,13 +9,21 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 为每个代码块添加复制按钮
   codeBlocks.forEach(function(preBlock) {
-    // 确保pre元素是相对定位
+    // 强制设置相对定位
     preBlock.style.position = 'relative';
+    
+    // 清除可能已存在的按钮
+    const existingButtons = preBlock.querySelectorAll('.code-copy-button');
+    existingButtons.forEach(btn => btn.remove());
     
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.className = 'code-copy-button';
     copyButton.setAttribute('aria-label', '复制代码');
+    copyButton.style.position = 'absolute';
+    copyButton.style.top = '2px';
+    copyButton.style.right = '2px';
+    copyButton.style.zIndex = '999';
     copyButton.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -25,12 +33,21 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     
     // 将按钮添加到pre元素中
-    preBlock.appendChild(copyButton);
+    preBlock.insertAdjacentElement('afterbegin', copyButton);
     
     // 添加点击事件监听器
-    copyButton.addEventListener('click', function() {
+    copyButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
       // 获取代码文本
-      const code = preBlock.textContent;
+      let code;
+      const codeEl = preBlock.querySelector('code');
+      if (codeEl) {
+        code = codeEl.textContent;
+      } else {
+        code = preBlock.textContent;
+      }
       
       // 使用现代 Clipboard API (如果可用)
       if (navigator.clipboard && window.isSecureContext) {
@@ -44,6 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 回退方法
         fallbackCopyTextToClipboard(code, copyButton);
       }
+      
+      return false;
     });
   });
   
