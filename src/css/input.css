@@ -41,69 +41,48 @@
 @layer components {
   /* 代码块容器样式 */
   pre {
-    @apply relative !important;
-    @apply mb-4;
+    @apply relative mb-4;
   }
 
-  /* 代码复制按钮 - 使用更高优先级 */
+  /* 代码块父容器 */
+  .code-block-container {
+    @apply relative mb-4;
+  }
+
+  /* 代码复制按钮 - 放在代码块上方 */
   .code-copy-button {
-    @apply absolute !important;
-    @apply top-2 !important;
-    @apply right-2 !important;
-    @apply p-0.5 !important;
-    @apply rounded !important;
-    @apply text-gray-400 dark:text-gray-500 !important;
-    @apply hover:text-gray-700 dark:hover:text-gray-300 !important;
-    @apply hover:bg-gray-100 dark:hover:bg-gray-700 !important;
-    @apply focus:outline-none !important;
-    @apply focus:ring-1 !important;
-    @apply focus:ring-primary-500 !important;
-    @apply transition-all !important;
-    @apply duration-200 !important;
-    @apply opacity-0 !important;
-    @apply z-[999] !important;
-    @apply text-[10px] !important;
-    @apply bg-transparent !important;
-    @apply border-0 !important;
-  }
-
-  /* 代码块悬停时显示按钮 */
-  pre:hover .code-copy-button {
-    @apply opacity-100 !important;
+    @apply block ml-auto mb-1 p-1;
+    @apply rounded text-gray-400 dark:text-gray-500;
+    @apply hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+    @apply focus:outline-none focus:ring-1 focus:ring-primary-500;
+    @apply transition-all duration-200;
+    @apply text-xs;
+    @apply bg-transparent;
+    @apply flex items-center justify-center;
   }
 
   /* 复制成功状态 */
   .code-copy-button.success {
-    @apply text-green-500 dark:text-green-400 !important;
+    @apply text-green-500 dark:text-green-400;
   }
 
   /* 复制失败状态 */
   .code-copy-button.error {
-    @apply text-red-500 dark:text-red-400 !important;
+    @apply text-red-500 dark:text-red-400;
   }
 
   /* 提示文本 */
   .code-copy-tooltip {
-    @apply absolute !important;
-    @apply right-0 !important;
-    @apply px-1 !important;
-    @apply py-0.5 !important;
-    @apply text-[8px] !important;
-    @apply bg-gray-800 !important;
-    @apply dark:bg-gray-700 !important;
-    @apply text-white !important;
-    @apply rounded !important;
-    @apply opacity-0 !important;
-    @apply invisible !important;
-    @apply transition-all !important;
-    @apply duration-200 !important;
-    @apply whitespace-nowrap !important;
-    @apply -top-5 !important;
+    @apply absolute right-0 px-1 py-0.5 text-[8px];
+    @apply bg-gray-800 dark:bg-gray-700 text-white rounded;
+    @apply opacity-0 invisible;
+    @apply transition-all duration-200;
+    @apply whitespace-nowrap;
+    @apply -top-5;
   }
 
   .code-copy-button:hover .code-copy-tooltip {
-    @apply opacity-100 !important;
-    @apply visible !important;
+    @apply opacity-100 visible;
   }
 
   .doc-container {

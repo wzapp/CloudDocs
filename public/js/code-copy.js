@@ -9,31 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 为每个代码块添加复制按钮
   codeBlocks.forEach(function(preBlock) {
-    // 强制设置相对定位
-    preBlock.style.position = 'relative';
+    // 创建代码块容器
+    const codeBlockContainer = document.createElement('div');
+    codeBlockContainer.className = 'code-block-container';
     
-    // 清除可能已存在的按钮
-    const existingButtons = preBlock.querySelectorAll('.code-copy-button');
-    existingButtons.forEach(btn => btn.remove());
+    // 将代码块插入到新容器之前
+    preBlock.parentNode.insertBefore(codeBlockContainer, preBlock);
+    
+    // 将代码块移动到容器中
+    codeBlockContainer.appendChild(preBlock);
     
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.className = 'code-copy-button';
     copyButton.setAttribute('aria-label', '复制代码');
-    copyButton.style.position = 'absolute';
-    copyButton.style.top = '2px';
-    copyButton.style.right = '2px';
-    copyButton.style.zIndex = '999';
     copyButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
         <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
       </svg>
+      <span>复制代码</span>
       <span class="code-copy-tooltip">复制</span>
     `;
     
-    // 将按钮添加到pre元素中
-    preBlock.insertAdjacentElement('afterbegin', copyButton);
+    // 将按钮添加到代码块容器的前面，但在容器内
+    codeBlockContainer.insertBefore(copyButton, preBlock);
     
     // 添加点击事件监听器
     copyButton.addEventListener('click', function(e) {
@@ -69,12 +69,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // 显示成功提示
   function showSuccess(button) {
     button.classList.add('success');
-    const tooltip = button.querySelector('.code-copy-tooltip');
-    tooltip.textContent = '已复制';
+    const textSpan = button.querySelector('span:not(.code-copy-tooltip)');
+    if (textSpan) {
+      textSpan.textContent = '已复制';
+    }
     
     // 更新图标为成功图标
     button.querySelector('svg').outerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="20 6 9 17 4 12"></polyline>
       </svg>
     `;
@@ -82,9 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2秒后恢复原状
     setTimeout(() => {
       button.classList.remove('success');
-      tooltip.textContent = '复制';
+      if (textSpan) {
+        textSpan.textContent = '复制代码';
+      }
       button.querySelector('svg').outerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
           <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
         </svg>
@@ -95,12 +99,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // 显示错误提示
   function showError(button) {
     button.classList.add('error');
-    const tooltip = button.querySelector('.code-copy-tooltip');
-    tooltip.textContent = '失败';
+    const textSpan = button.querySelector('span:not(.code-copy-tooltip)');
+    if (textSpan) {
+      textSpan.textContent = '复制失败';
+    }
     
     // 更新图标为错误图标
     button.querySelector('svg').outerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
@@ -109,9 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2秒后恢复原状
     setTimeout(() => {
       button.classList.remove('error');
-      tooltip.textContent = '复制';
+      if (textSpan) {
+        textSpan.textContent = '复制代码';
+      }
       button.querySelector('svg').outerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
           <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
         </svg>
