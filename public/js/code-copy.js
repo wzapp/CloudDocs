@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     copyButton.style.fontSize = '10px';
     copyButton.style.zIndex = '999';
     copyButton.style.opacity = '0';
-    copyButton.style.transition = 'opacity 0.2s';
+    copyButton.style.transition = 'opacity 0.2s, color 0.2s';
     copyButton.style.width = '22px';
     copyButton.style.height = '22px';
     copyButton.style.display = 'flex';
@@ -74,6 +74,17 @@ document.addEventListener('DOMContentLoaded', function() {
     preBlock.addEventListener('mouseleave', function() {
       console.log(`代码块 ${index+1} 鼠标离开`);
       copyButton.style.opacity = '0';
+    });
+    
+    // 添加按钮自身的悬停效果
+    copyButton.addEventListener('mouseenter', function() {
+      copyButton.style.color = '#333'; // 深灰色，悬停时颜色加深
+      copyButton.style.background = 'rgba(220, 220, 220, 0.9)'; // 背景更不透明
+    });
+    
+    copyButton.addEventListener('mouseleave', function() {
+      copyButton.style.color = '#aaa'; // 恢复原色
+      copyButton.style.background = 'rgba(220, 220, 220, 0.7)';
     });
     
     // 添加点击事件监听器
@@ -133,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
     style.textContent = `
       pre { position: relative !important; overflow: visible !important; }
       pre:hover .code-copy-button { opacity: 1 !important; }
-      .code-copy-button:hover { color: #4B5563 !important; }
+      .code-copy-button:hover { color: #333 !important; background: rgba(220, 220, 220, 0.9) !important; }
     `;
     document.head.appendChild(style);
     console.log('添加了全局样式');
