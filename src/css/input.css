@@ -49,7 +49,7 @@
     @apply relative mb-4;
   }
 
-  /* 代码复制按钮 - 放在代码块右上角 */
+  /* 代码复制按钮 */
   .code-copy-button {
     @apply absolute top-2 right-2 p-1;
     @apply rounded text-gray-400 dark:text-gray-500;
@@ -58,12 +58,11 @@
     @apply transition-all duration-200;
     @apply text-[10px];
     @apply bg-transparent;
-    @apply flex items-center justify-center;
     @apply z-10 opacity-0;
   }
 
   /* 代码块悬停时显示按钮 */
-  .code-block-container:hover .code-copy-button {
+  pre:hover .code-copy-button {
     @apply opacity-100;
   }
 
