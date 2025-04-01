@@ -25,7 +25,7 @@ wrangler login
 ### 3. 克隆项目
 
 ```bash
-git clone https://github.com/yourusername/cloudocs.git
+git clone https://github.com/wzapp/CloudDocs.git
 cd cloudocs
 ```
 

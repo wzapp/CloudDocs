@@ -126,3 +126,8 @@ git push
 4. 在文档导航中添加此文档的链接（可以编辑 `src/template.js` 文件，在导航菜单中添加指向 `/docs/github-upload` 的链接）
 
 完成这些步骤后，您就可以在文档系统中通过 `/docs/github-upload` 路径访问这篇新添加的文档了。
+#### 新提交步骤
+1. git checkout v2.0   切换到需要上传的分支
+2. git add .           添加所有修改的文件
+3. git commit -m "增加暗黑模式"    
+4. git push origin v2.0   将修改推送到远程的v2.0分支

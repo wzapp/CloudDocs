@@ -39,6 +39,47 @@
 }
 
 @layer components {
+  /* 代码复制按钮 */
+  .code-copy-button {
+    @apply absolute top-2 right-2 p-2 rounded-md text-gray-400 dark:text-gray-500; 
+    @apply hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
+    @apply transition-colors duration-200;
+    @apply opacity-0;
+  }
+
+  /* 代码块容器添加悬停状态 */
+  pre {
+    @apply relative;
+  }
+
+  pre:hover .code-copy-button {
+    @apply opacity-100;
+  }
+
+  /* 复制成功状态 */
+  .code-copy-button.success {
+    @apply text-green-500 dark:text-green-400;
+  }
+
+  /* 复制失败状态 */
+  .code-copy-button.error {
+    @apply text-red-500 dark:text-red-400;
+  }
+
+  /* 提示文本 */
+  .code-copy-tooltip {
+    @apply absolute top-full right-0 mt-2 px-2 py-1 text-xs;
+    @apply bg-gray-800 dark:bg-gray-700 text-white rounded;
+    @apply opacity-0 invisible translate-y-1;
+    @apply transition-all duration-200;
+    @apply whitespace-nowrap;
+  }
+
+  .code-copy-button:hover .code-copy-tooltip {
+    @apply opacity-100 visible translate-y-0;
+  }
+
   .doc-container {
     @apply max-w-4xl mx-auto px-4 py-4;
   }

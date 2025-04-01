@@ -20,6 +20,8 @@ function getPageTemplate(title, content, currentPath = '') {
   <link href="/css/styles.css" rel="stylesheet">
   <!-- 预先加载主题脚本，避免闪烁 -->
   <script src="/js/theme.js"></script>
+  <!-- 添加代码复制功能 -->
+  <script src="/js/code-copy.js"></script>
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
   <!-- 顶部导航栏 -->

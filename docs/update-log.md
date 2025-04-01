@@ -1,5 +1,61 @@
 # 更新日志
 
+## 2025-05-20：添加代码块复制功能
+
+### 功能更新
+1. **代码块复制功能**：
+   - 在每个代码块右上角添加复制按钮
+   - 鼠标悬停在代码块上时显示复制按钮
+   - 点击按钮复制代码内容到剪贴板
+   - 提供视觉反馈指示复制成功或失败
+
+2. **用户体验改进**：
+   - 设计简洁的复制按钮样式，适配亮色和暗色模式
+   - 添加按钮悬停效果和提示文本
+   - 适配各种屏幕尺寸
+   - 实现无障碍支持，包括适当的ARIA标签
+
+### 技术实现
+1. JavaScript复制功能：
+   ```javascript
+   // 复制代码到剪贴板
+   navigator.clipboard.writeText(code)
+     .then(() => {
+       // 复制成功，显示反馈
+       copyButton.classList.add('success');
+       tooltip.textContent = '已复制!';
+     })
+     .catch((err) => {
+       // 复制失败，显示错误
+       copyButton.classList.add('error');
+       tooltip.textContent = '复制失败';
+     });
+   ```
+
+2. 兼容性处理：
+   ```javascript
+   // 对于不支持Clipboard API的浏览器提供回退方法
+   function fallbackCopyTextToClipboard(text) {
+     const textArea = document.createElement('textarea');
+     textArea.value = text;
+     document.body.appendChild(textArea);
+     textArea.select();
+     document.execCommand('copy');
+     document.body.removeChild(textArea);
+   }
+   ```
+
+### 新增和修改文件
+- `public/js/code-copy.js`：新增复制代码功能的JavaScript实现
+- `src/css/input.css`：添加复制按钮的样式和交互状态
+- `src/template.js`：在HTML模板中引入复制代码脚本
+
+### 使用体验改进
+- 用户可以通过简单点击快速复制代码，提高效率
+- 直观的视觉反馈指示操作结果
+- 优雅的动画和过渡效果增强用户体验
+- 适配移动端和桌面端的不同交互需求
+
 ## 2025-05-15：增加暗黑模式支持
 
 ### 功能更新
@@ -78,7 +134,7 @@
 
 ## 2025-05-01：CloudDocs v2.0 正式发布
 
-我们很高兴地宣布 CloudDocs v2.0 正式发布！这是一次重大更新，带来了全面的用户体验优化和功能增强。详细发布说明请查看[v2.0版本说明](v2.0-release-notes.md)。
+我们很高兴地宣布 CloudDocs v2.0 正式发布！这是一次重大更新，带来了全面的用户体验优化和功能增强。详细发布说明请查看[v2.0版本说明](v2.0-release-notes)。
 
 ### 主要更新亮点
 

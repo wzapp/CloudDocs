@@ -677,6 +677,30 @@ li:is(.dark *) {
   color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
+/* 代码复制按钮 */
+
+/* 代码块容器添加悬停状态 */
+
+pre {
+  position: relative;
+}
+
+/* 复制成功状态 */
+
+/* 复制失败状态 */
+
+.code-copy-button.error {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
+.code-copy-button.error:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
+}
+
+/* 提示文本 */
+
 .doc-container {
   margin-left: auto;
   margin-right: auto;
@@ -1802,10 +1826,6 @@ nav > .nav-group-item {
   margin-bottom: 2rem;
 }
 
-.ml-1 {
-  margin-left: 0.25rem;
-}
-
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -2016,11 +2036,6 @@ nav > .nav-group-item {
   line-height: 1.75rem;
 }
 
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -2130,10 +2145,6 @@ nav > .nav-group-item {
   display: block;
 }
 
-.dark\:inline:is(.dark *) {
-  display: inline;
-}
-
 .dark\:hidden:is(.dark *) {
   display: none;
 }
@@ -2202,10 +2213,6 @@ nav > .nav-group-item {
 }
 
 @media (min-width: 768px) {
-  .md\:inline {
-    display: inline;
-  }
-
   .md\:flex {
     display: flex;
   }
