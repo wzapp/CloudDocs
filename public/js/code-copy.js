@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     copyButton.className = 'code-copy-button';
     copyButton.setAttribute('aria-label', '复制代码');
     copyButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
       </svg>
       <span class="code-copy-tooltip">复制代码</span>
     `;
@@ -56,10 +56,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const tooltip = button.querySelector('.code-copy-tooltip');
     tooltip.textContent = '已复制!';
     
+    // 更新图标为成功图标
+    button.querySelector('svg').outerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    `;
+    
     // 2秒后恢复原状
     setTimeout(() => {
       button.classList.remove('success');
       tooltip.textContent = '复制代码';
+      button.querySelector('svg').outerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      `;
     }, 2000);
   }
   
@@ -69,10 +82,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const tooltip = button.querySelector('.code-copy-tooltip');
     tooltip.textContent = '复制失败';
     
+    // 更新图标为错误图标
+    button.querySelector('svg').outerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    `;
+    
     // 2秒后恢复原状
     setTimeout(() => {
       button.classList.remove('error');
       tooltip.textContent = '复制代码';
+      button.querySelector('svg').outerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      `;
     }, 2000);
   }
   
