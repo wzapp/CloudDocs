@@ -49,16 +49,22 @@
     @apply relative mb-4;
   }
 
-  /* 代码复制按钮 - 放在代码块上方 */
+  /* 代码复制按钮 - 放在代码块右上角 */
   .code-copy-button {
-    @apply block ml-auto mb-1 p-1;
+    @apply absolute top-2 right-2 p-1;
     @apply rounded text-gray-400 dark:text-gray-500;
     @apply hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
     @apply focus:outline-none focus:ring-1 focus:ring-primary-500;
     @apply transition-all duration-200;
-    @apply text-xs;
+    @apply text-[10px];
     @apply bg-transparent;
     @apply flex items-center justify-center;
+    @apply z-10 opacity-0;
+  }
+
+  /* 代码块悬停时显示按钮 */
+  .code-block-container:hover .code-copy-button {
+    @apply opacity-100;
   }
 
   /* 复制成功状态 */
@@ -73,12 +79,12 @@
 
   /* 提示文本 */
   .code-copy-tooltip {
-    @apply absolute right-0 px-1 py-0.5 text-[8px];
+    @apply absolute px-1 py-0.5 text-[8px];
     @apply bg-gray-800 dark:bg-gray-700 text-white rounded;
     @apply opacity-0 invisible;
     @apply transition-all duration-200;
     @apply whitespace-nowrap;
-    @apply -top-5;
+    @apply -top-6 left-1/2 -translate-x-1/2;
   }
 
   .code-copy-button:hover .code-copy-tooltip {
