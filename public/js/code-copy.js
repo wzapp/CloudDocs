@@ -36,19 +36,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 直接设置样式
     copyButton.style.position = 'absolute';
-    copyButton.style.top = '8px';
-    copyButton.style.right = '8px';
-    copyButton.style.padding = '6px';
+    copyButton.style.top = '4px';
+    copyButton.style.right = '4px';
+    copyButton.style.padding = '4px';
     copyButton.style.color = '#aaa';
-    copyButton.style.background = 'rgba(220, 220, 220, 0.8)';
-    copyButton.style.borderRadius = '4px 0 0 4px';
-    copyButton.style.fontSize = '12px';
+    copyButton.style.background = 'rgba(220, 220, 220, 0.7)';
+    copyButton.style.borderRadius = '3px';
+    copyButton.style.fontSize = '10px';
     copyButton.style.zIndex = '999';
     copyButton.style.opacity = '0';
     copyButton.style.transition = 'opacity 0.2s';
+    copyButton.style.width = '22px';
+    copyButton.style.height = '22px';
+    copyButton.style.display = 'flex';
+    copyButton.style.alignItems = 'center';
+    copyButton.style.justifyContent = 'center';
+    copyButton.style.border = 'none';
+    copyButton.style.cursor = 'pointer';
     
     copyButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor" style="width: 14px; height: 14px;">
         <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
         <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
       </svg>
@@ -94,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // 更新图标为勾选标记
           copyButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor" style="width: 14px; height: 14px;">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
           `;
@@ -103,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
           setTimeout(() => {
             copyButton.style.color = '#aaa';
             copyButton.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor" style="width: 14px; height: 14px;">
                 <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                 <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
               </svg>
