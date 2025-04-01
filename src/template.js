@@ -302,13 +302,209 @@ function getPageTemplate(title, content, currentPath = '') {
     .main-content {
       width: 100%;
       padding-bottom: 2rem;
+      padding: 1rem;
+      overflow-x: hidden;
     }
 
-    /* 确保侧边栏在小屏幕上正确显示 */
+    .doc-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .doc-content {
+      width: 100%;
+    }
+
+    /* 侧边栏样式 */
+    .doc-sidebar {
+      width: 260px;
+      min-width: 260px;
+      background-color: white;
+      border-right: 1px solid #e5e7eb;
+      padding: 1rem 0;
+      height: calc(100vh - 60px);
+      position: sticky;
+      top: 60px;
+      overflow-y: auto;
+      z-index: 30;
+      transition: all 0.3s ease;
+    }
+
+    /* 移动端侧边栏样式 */
     @media (max-width: 1023px) {
       .doc-sidebar {
+        position: fixed;
+        left: -280px;
+        top: 60px;
+        height: calc(100vh - 60px);
         z-index: 40;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        transition: left 0.3s ease;
       }
+
+      .doc-sidebar.show {
+        left: 0;
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 30;
+        display: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+    }
+
+    /* 右侧导航样式 */
+    .update-sidebar {
+      width: 240px;
+      min-width: 240px;
+      padding: 1rem;
+      height: calc(100vh - 60px);
+      position: sticky;
+      top: 60px;
+      overflow-y: auto;
+      border-left: 1px solid #e5e7eb;
+      margin-left: auto;
+      background-color: white;
+    }
+
+    /* 适配桌面端布局 */
+    @media (min-width: 1024px) {
+      .relative.flex-grow.flex {
+        display: flex;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+      
+      .main-content {
+        flex: 1;
+      }
+    }
+
+    /* 页面顶部导航按钮样式 */
+    .header-mobile-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 0.375rem;
+      color: #4B5563;
+      transition: all 0.2s;
+    }
+
+    .header-mobile-menu:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #111827;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      padding: 0.5rem 0.75rem;
+      color: #4B5563;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+      margin-right: 0.5rem;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #111827;
+    }
+
+    /* 修复垂直对齐问题 */
+    .doc-content h1,
+    .doc-content h2,
+    .doc-content h3,
+    .doc-content h4,
+    .doc-content h5,
+    .doc-content h6 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .doc-content h1 {
+      font-size: 2rem;
+    }
+
+    .doc-content h2 {
+      font-size: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .doc-content h3 {
+      font-size: 1.25rem;
+    }
+
+    .doc-content p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    /* 代码块样式 */
+    .doc-content pre {
+      margin: 1rem 0;
+      padding: 1rem;
+      background-color: #f3f4f6;
+      border-radius: 0.375rem;
+      overflow-x: auto;
+    }
+
+    /* 内联代码样式 */
+    .doc-content code {
+      padding: 0.2rem 0.4rem;
+      background-color: #f3f4f6;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+    }
+
+    /* 列表样式 */
+    .doc-content ul, 
+    .doc-content ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .doc-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* 表格样式 */
+    .doc-content table {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-collapse: collapse;
+    }
+
+    .doc-content th,
+    .doc-content td {
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    .doc-content th {
+      background-color: #f9fafb;
+      font-weight: 600;
     }
   </style>
 </body>
